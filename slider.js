@@ -289,7 +289,11 @@
               w = watchables[_j];
               scope.$watch(w, updateDOM, true);
             }
-            return window.addEventListener("resize", updateDOM);
+            if (window.addEventListener) {
+              return window.addEventListener("resize", updateDOM);
+            } else {
+              return window.attachEvent("resize", updateDOM);
+            }
           }
         };
       }

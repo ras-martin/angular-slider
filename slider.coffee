@@ -206,7 +206,11 @@ sliderDirective = ($timeout) ->
 
       $timeout updateDOM
       scope.$watch w, updateDOM, true for w in watchables
-      window.addEventListener "resize", updateDOM
+
+      if window.addEventListener
+        window.addEventListener "resize", updateDOM
+      else
+        window.attachEvent "resize", updateDOM
 
 qualifiedDirectiveDefinition = [
   '$timeout'
